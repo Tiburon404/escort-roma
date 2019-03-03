@@ -1,0 +1,12 @@
+{% extends "baseLayout.twig" %}
+
+{% block documentReadyJs %}
+    $.getScript('{{ assetJS }}/machine.js');
+    dataManagerA = new arcadia.dataManager('./api', arcadia.dataManager.dataType.JSON);
+    var addModMachine = $('#addModMachine');
+    addModMachine.show();
+{% endblock %}
+
+{% block content %}
+    {% include('modMachine.twig') %}
+{% endblock content %}

@@ -1,0 +1,132 @@
+{%  extends "baseLayout.twig" %}
+
+{% block style %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+{% endblock %}
+
+{% block javascriptFile %}
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="{{ assetJS }}/mapTest/municipi.js"></script>
+    <script src="{{ assetJS }}/mapTest/wifi.js"></script>
+    <script src="{{ assetJS }}/mapTest/municipi.json"></script>
+{% endblock %}
+
+{% block documentReadyJs %}
+    $.getScript('{{ assetJS }}/mapPolygon.js');
+    dataManagerA = new escort.dataManager('./api', escort.dataManager.dataType.JSON);
+{% endblock %}
+
+{% block content %}
+
+
+<style>
+
+    #overlay {
+    position: absolute;
+    z-index: 500;
+    background: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 10px;
+    left: 45%;
+    min-height: 10px;
+    bottom: 0;    
+    margin-bottom: 35px;  
+    }
+    #mapid {
+    width: 100%;
+    height: 700px;
+    position: relative;
+    z-index: 80;
+    }
+
+    #slide-in{
+    background: rgba(255,255,255,0.7);
+    position: absolute;
+    width: 250px;
+    z-index: 81;
+    background: white;
+    margin-left: -600px;
+    transition: 0.7s;
+    }
+    #slide-in.in{
+    background: rgba(255,255,255,0.7);
+    margin-left:0px;
+    height: 650px;
+    }
+
+    #divSearchWifi{
+    margin-top: 0px;
+    text-align: center;
+    }
+    #searchWifi{
+    margin-bottom: 10px;
+    margin-top: 0px;
+    }
+    #divSearchMunicipio{
+    margin-top: 0px;
+    text-align: center;
+    }
+    #searchMunicipio{
+    margin-bottom: 10px;
+    margin-top: 0px;
+    }
+    #divButton{
+    text-align: center;
+    margin-top: 20px;
+    }
+
+    #overlay h5{
+    margin-top: 10px;
+    }
+    #overlay h4{
+    text-align: center;
+    }
+    #district-select{
+    width: -webkit-fill-available;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div id="slide-in">
+                    <h3>More information</h3>
+                    {# <div id="select">
+                    <select class="custom-select" id= "district-select">
+                        <option value="">(nessun-municipio)</option>
+                    </select>
+                    </div> #}
+                    <div id="district-information"></div>
+                </div>
+                <div id="mapid"></div>
+                <div id="overlay">
+                    <h4>Map options </h4><hr>
+                    <h7>Search wifi address<h7>
+                    <div id="divSearchWifi">
+                    <input id="searchWifi" tipe="text"></input>
+                    </div>
+                    <h7>Search district by urban area<h7>
+                    <div id="divSearchMunicipio">
+                    <input id="searchMunicipio" tipe="text"></input>
+                    </div>
+                    <div id="divButton">
+                    <button type="info" class="btn btn-outline-primary" id="info">Info </button>
+                    <button type="botton" class="btn btn-outline-success" id="salva">Salva </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

@@ -1,0 +1,75 @@
+{%  extends "baseLayout.twig" %}
+
+{% block documentReadyJs %}
+
+    $.getScript('{{ assetJS }}/machine.js');
+    dataManagerA = new arcadia.dataManager('./api', arcadia.dataManager.dataType.JSON);
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- table primary start -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">{{ TITLE_SUB_MENU }}</h4>
+                    <div id="raceFeatures">
+                        <div class="data-table">
+                            <table id="dataMachineTable" class="hover">
+                                <thead class="bg-light text-capitalize">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Nome</th>
+                                    <th>Descrizione</th>
+                                    <th>Distanza Semiassi</th>
+                                    <th>Massima velocità</th>
+                                    <th>Raggio di curvatura</th>
+                                    <th>Modifica</th>
+                                    <th>Elimina</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%  for list in MACHINE_LIST %}
+                                    <tr>
+                                        <td> {{ list.id }} </td>
+                                        <td> {{ list.name }} </td>
+                                        <td> {{ list.description }} </td>
+                                        <td> {{ list.drive_shaft }} </td>
+                                        <td> {{ list.full_speed }} </td>
+                                        <td> {{ list.radius_curve }} </td>
+                                        <td> <img src="{{ assetIMAGES }}/icon/editIcon.png" alt="edit"></td>
+                                        <td> <img src="{{ assetIMAGES }}/icon/deleteIcon.png" alt="delete"></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include ('modMachine.twig') %}
+    <!-- Finestra Modale per eliminazione Macchina -->
+    <div class="modal fade" id="confirmDeleteMachine">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Conferma Eliminazione</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Eliminare la macchina?</p>
+                    <input type="hidden" name="idMachine" id="idMachine" value=""/>
+                    <input type="hidden" name="canDelete" id="canDelete" value=""/>
+                    <input type="hidden" name="rowNum" id="rowNum" value=""/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                    <button id="btn_del_machine" type="button" class="btn btn-primary">Conferma</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

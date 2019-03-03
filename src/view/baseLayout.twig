@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Native CSS -->
+    <link rel="stylesheet" href="{{ assetCSS }}/styles.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/metisMenu.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/export.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/typography.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/default-css.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/styles.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/responsive.css" type="text/css">
+
+    <link rel="stylesheet" href="{{ assetCSS }}/jquery.dataTables.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/dataTables.bootstrap4.min.css" type="text/css"> 
+    <link rel="stylesheet" href="{{ assetCSS }}/responsive.bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/responsive.jqueryui.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ assetCSS }}/default.min.css" type="text/css">
+    <!-- Extra CSS -->
+    {% block style %}{% endblock %}
+
+    <!-- Native JAVSCRIPT -->
+    <script src="{{ assetJS }}/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{ assetJS }}/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{{ assetJS }}/popper.min.js"></script>
+    <script src="{{ assetJS }}/bootstrap.min.js"></script>
+    <script src="{{ assetJS }}/owl.carousel.min.js"></script>
+    <script src="{{ assetJS }}/metisMenu.min.js"></script>
+    <script src="{{ assetJS }}/jquery.slimscroll.min.js"></script>
+    <script src="{{ assetJS }}/jquery.slicknav.min.js"></script>
+    <script src="{{ assetJS }}/jquery.slimscroll.min.js"></script>
+    <script src="{{ assetJS }}/jquery.dataTables.min.js"></script>
+    <script src="{{ assetJS }}/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ assetJS }}/dataTables.responsive.min.js"></script>
+    <script src="{{ assetJS }}/responsive.bootstrap.min.js"></script>
+    <script src="{{ assetJS }}/init.js"></script>
+    <script src="{{ assetJS }}/dataManager.js"></script>
+    <script src="{{ assetJS }}/error.js"></script>
+
+    <!-- Extra Javascript File -->
+    {% block javascriptFile %}{% endblock %}
+
+    <!-- Extra JavaScript -->
+    <script>
+        {% block javascript %}{% endblock %}
+    </script>
+
+    <link rel="shortcut icon" type="image/png" href="{{ assetIMAGES }}/icon/styles.css/favicon.ico">
+</head>
+<body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        $.getScript('{{ assetJS }}/plugins.js');
+        $.getScript('{{ assetJS }}/scripts.js');
+
+        infoDialog = new escort.error('escort-dialog-title','escort-dialog-message','escort-dialog-extraInfo','InfoDialog');
+
+        {% block documentReady %}{% endblock %}
+
+        {% block documentReadyJs %}{% endblock %}
+
+
+    });
+</script>
+
+
+
+<div class="page-container">
+    <div class="sidebar-menu">
+        {% include('menuBar.twig') %}
+    </div>
+    <div class="main-content">
+        <div class="header-area">
+            <div class="row align-items-center">
+                {% include('infoBar.twig') %}
+            </div>
+        </div>
+        <div class="page-title-area">
+            {% include('titleArea.twig') %}
+        </div>
+        <div class="main-content-inner">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-area">
+            <p>Escort Roma</p>
+        </div>
+    </footer>
+</div>
+{% include('adminAlert.twig') %}
+
+</body>
+
+</html>
